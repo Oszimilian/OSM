@@ -15,20 +15,20 @@ from tkinter import font as tkfont
 
 DEFAULT_FILE = "saetze.txt"
 
-BG = "#1b1e2b"
-PANEL = "#252a3c"
-POOL_BG = "#252a3c"
-SLOT_FILL = "#1b1e2b"
-SLOT_LINE = "#4a5274"
-TEXT = "#e8ebf5"
-MUTED = "#8b93b3"
-ACCENT = "#6c8cff"
+BG = "#f3f5fb"
+PANEL = "#e1e6f3"
+POOL_BG = "#dfe5f4"
+SLOT_FILL = "#ffffff"
+SLOT_LINE = "#2b3556"
+TEXT = "#1f2740"
+MUTED = "#5b6585"
+ACCENT = "#3b5bdb"
 TOKEN_STYLES = {
-    None: ("#4c6ef5", "#7b93ff"),
-    "ok": ("#2f9e62", "#5fd196"),
-    "bad": ("#d6454b", "#ff8a8f"),
+    None: ("#4c6ef5", "#2f49b8"),
+    "ok": ("#2f9e62", "#1d7044"),
+    "bad": ("#d6454b", "#9c2227"),
 }
-SHADOW = "#10121b"
+SHADOW = "#b7c0da"
 
 
 def rr_points(x1, y1, x2, y2, r):
@@ -161,7 +161,7 @@ class Board(tk.Canvas):
                 x, y = pad, y + h + gap + 6
             self.slots.append((x, y, slot_w))
             self.create_polygon(rr_points(x, y, x + slot_w, y + h, 10), smooth=True,
-                                fill=SLOT_FILL, outline=SLOT_LINE, dash=(5, 4), width=2,
+                                fill=SLOT_FILL, outline=SLOT_LINE, dash=(6, 3), width=2,
                                 tags="bg")
             self.create_text(x + slot_w / 2, y + h / 2, text=str(n + 1), fill=SLOT_LINE,
                              font=self.label_font, tags="bg")
@@ -318,13 +318,13 @@ class App(tk.Tk):
         style.theme_use("clam")
         style.configure("TButton", font=(family, 11), padding=(16, 8), borderwidth=0,
                         background=PANEL, foreground=TEXT, focuscolor=PANEL)
-        style.map("TButton", background=[("active", "#323956"), ("disabled", "#20243a")],
-                  foreground=[("disabled", "#5a6180")])
+        style.map("TButton", background=[("active", "#cfd7ee"), ("disabled", "#eceff7")],
+                  foreground=[("disabled", "#a0a8c2")])
         style.configure("Accent.TButton", background=ACCENT, foreground="white",
                         font=(family, 11, "bold"), focuscolor=ACCENT)
         style.map("Accent.TButton",
-                  background=[("active", "#8aa3ff"), ("disabled", "#36406e")],
-                  foreground=[("disabled", "#7c86b8")])
+                  background=[("active", "#5473e8"), ("disabled", "#b9c4ee")],
+                  foreground=[("disabled", "#eef1fc")])
         style.configure("Horizontal.TProgressbar", troughcolor=PANEL, background=ACCENT,
                         borderwidth=0, lightcolor=ACCENT, darkcolor=ACCENT, thickness=14)
         style.configure("Done.Horizontal.TProgressbar", troughcolor=PANEL,
@@ -434,7 +434,7 @@ class App(tk.Tk):
             self.solved = True
             self.board.locked = True
             self.progress.config(style="Done.Horizontal.TProgressbar")
-            self.progress_label.config(text="100 % – Richtig!", fg="#5fd196")
+            self.progress_label.config(text="100 % – Richtig!", fg="#1d7044")
             last = self.index == len(self.order) - 1
             self.submit.config(text="Fertig" if last else "Weiter ►", state="normal")
         else:
