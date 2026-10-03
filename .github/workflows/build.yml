@@ -1,0 +1,28 @@
+name: Windows-Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: PyInstaller installieren
+        run: python -m pip install pyinstaller
+      - name: Exe bauen
+        run: pyinstaller --onefile --windowed --name Satzpuzzle satzpuzzle.py
+      - name: Beispieldatei beilegen
+        run: Copy-Item saetze.txt dist/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Satzpuzzle-Windows
+          path: |
+            dist/Satzpuzzle.exe
+            dist/saetze.txt
